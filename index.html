@@ -1,0 +1,3317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Easy Saturdays Foundation | Digital Platform</title>
+    <style>
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.8rem;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .btn-nav {
+            background-color: var(--secondary-color);
+            color: var(--text-dark) !important;
+            padding: 0.4rem 1.2rem !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.05);
+            background-color: #d97706 !important;
+        }
+
+        .btn-nav-outline {
+            background: transparent !important;
+            color: var(--text-light) !important;
+            border: 2px solid var(--text-light) !important;
+        }
+
+        .btn-nav-outline:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            transform: scale(1.05);
+        }
+
+        .user-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            margin-right: 0.3rem;
+        }
+
+        .user-badge .role-tag {
+            font-size: 0.65rem;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            padding: 0.1rem 0.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .nav-divider {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- PAGE CONTENT --- */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+            padding: 2rem 0;
+            flex: 1;
+        }
+
+        .page-section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- AUTH FORMS --- */
+        .auth-container {
+            max-width: 500px;
+            margin: 1.5rem auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 0.25rem;
+            color: var(--primary-color);
+        }
+
+        .auth-container .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 0.6rem;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .auth-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .auth-tab:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active-form {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: var(--danger-color);
+        }
+
+        .form-group .error-msg {
+            color: var(--danger-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group .error-msg.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 3rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #64748b;
+            padding: 0.2rem;
+        }
+
+        .toggle-password:hover {
+            color: var(--primary-color);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            accent-color: var(--primary-color);
+        }
+
+        .checkbox-group label {
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e40af;
+        }
+
+        .btn-success {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            width: auto;
+        }
+
+        .btn-xs {
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            width: auto;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f172a 100%);
+            color: var(--text-light);
+            padding: 3rem 0;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--secondary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-actions .btn {
+            width: auto;
+        }
+
+        /* --- CAMPAIGN CARDS --- */
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .campaign-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .campaign-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background-color: #cbd5e1;
+        }
+
+        .campaign-card .content {
+            padding: 1.25rem;
+        }
+
+        .campaign-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .campaign-card .meta {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.8rem;
+        }
+
+        .progress-bar {
+            background-color: #e2e8f0;
+            border-radius: 50px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 0.4rem;
+        }
+
+        .progress-bar .progress-fill {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 50px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .campaign-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .campaign-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .campaign-actions .btn {
+            width: auto;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        /* --- DASHBOARD --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .dashboard-card h3 {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dashboard-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0.3rem 0;
+        }
+
+        .dashboard-card .number.green {
+            color: var(--accent-color);
+        }
+
+        .card-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 1.5rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* --- TABLES WITH FILTERS --- */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 0.5rem;
+        }
+
+        .table-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            background: #f1f5f9;
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+        }
+
+        .table-filters select,
+        .table-filters input {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: white;
+            min-width: 120px;
+        }
+
+        .table-filters input:focus,
+        .table-filters select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .table-filters .filter-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        table th:hover {
+            background-color: #1e40af;
+        }
+
+        table th .sort-icon {
+            margin-left: 0.3rem;
+            font-size: 0.7rem;
+        }
+
+        table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        table tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .status-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.completed {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-badge.upcoming {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-badge.cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-badge.approved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-badge.active-campaign {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.ended {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active-modal {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            max-width: 550px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .modal-content .modal-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content .btn {
+            width: auto;
+            margin-top: 0.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- PAYMENT PAGE --- */
+        .payment-container {
+            max-width: 550px;
+            margin: 1.5rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .payment-container .payment-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-container .payment-header .amount-input {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            border: none;
+            background: transparent;
+            width: 200px;
+            text-align: center;
+            outline: none;
+        }
+
+        .payment-container .payment-header .amount-input:focus {
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .payment-container .payment-header .currency-symbol {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .payment-amount-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-amount-actions .btn {
+            width: auto;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .payment-method {
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+        }
+
+        .payment-method.selected {
+            border-color: var(--accent-color);
+            background: #f0fdf4;
+        }
+
+        .payment-method .icon {
+            font-size: 1.5rem;
+        }
+
+        .payment-method .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .payment-summary {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+
+        .payment-summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+        }
+
+        .payment-summary .total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 2px solid #cbd5e1;
+            padding-top: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        /* --- VOLUNTEER DETAIL --- */
+        .volunteer-detail-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+        }
+
+        .volunteer-detail-card .detail-row {
+            display: flex;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .volunteer-detail-card .detail-label {
+            font-weight: 600;
+            width: 140px;
+            color: #64748b;
+        }
+
+        .volunteer-detail-card .detail-value {
+            flex: 1;
+        }
+
+        .volunteer-detail-card select,
+        .volunteer-detail-card input {
+            padding: 0.4rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .volunteer-detail-card select:focus,
+        .volunteer-detail-card input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* --- ADMIN PANELS --- */
+        .admin-panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 1.5rem;
+        }
+
+        .admin-panel .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            gap: 0.5rem;
+        }
+
+        .admin-panel .panel-header h3 {
+            margin: 0;
+        }
+
+        /* --- ROLE CHANGE REQUESTS --- */
+        .role-request-card {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 0.8rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .role-request-card .request-info {
+            flex: 1;
+        }
+
+        .role-request-card .request-info .name {
+            font-weight: 600;
+        }
+
+        .role-request-card .request-info .details {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .role-request-card .request-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .role-request-card .request-actions .btn {
+            width: auto;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 2rem 0;
+            margin-top: auto;
+            text-align: center;
+            border-top: 3px solid var(--secondary-color);
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        footer .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        footer .footer-links a {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        footer .footer-links a:hover {
+            color: #fbbf24;
+            text-decoration: underline;
+        }
+
+        footer .footer-social {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        footer .footer-social a {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        footer .footer-social a:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        footer .footer-copy {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .nav-links {
+                gap: 0.3rem;
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+            .nav-links a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .btn {
+                width: 100%;
+            }
+            .hero-actions .btn {
+                width: 100%;
+            }
+            .auth-container {
+                padding: 1.5rem;
+            }
+            .user-badge {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .volunteer-detail-card .detail-row {
+                flex-direction: column;
+            }
+            .volunteer-detail-card .detail-label {
+                width: 100%;
+            }
+            .modal-content {
+                padding: 1.5rem;
+            }
+            .campaign-actions .btn {
+                width: 100%;
+            }
+            .role-request-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .role-request-card .request-actions {
+                justify-content: center;
+            }
+            footer .footer-links {
+                gap: 1rem;
+            }
+            .nav-divider {
+                display: none;
+            }
+            .table-filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .table-filters select,
+            .table-filters input {
+                width: 100%;
+            }
+            .volunteer-detail-card select,
+            .volunteer-detail-card input {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .auth-container {
+                padding: 1rem;
+            }
+            .campaign-grid {
+                grid-template-columns: 1fr;
+            }
+            .payment-container .payment-header .amount-input {
+                font-size: 2rem;
+                width: 150px;
+            }
+            .payment-container .payment-header .currency-symbol {
+                font-size: 2rem;
+            }
+        }
+
+        /* --- UTILITY --- */
+        .text-center {
+            text-align: center;
+        }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .flex { display: flex; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .gap-1 { gap: 0.5rem; }
+        .gap-2 { gap: 1rem; }
+        .w-full { width: 100%; }
+        .text-muted { color: #64748b; }
+        .text-sm { font-size: 0.85rem; }
+        .text-danger { color: var(--danger-color); }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" onclick="navigateTo('home')">Easy<span>Saturdays</span></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a class="nav-link active" data-section="home">Home</a></li>
+                    <li><a class="nav-link" data-section="campaigns">Campaigns</a></li>
+                    <li id="guestLinks">
+                        <a class="nav-link" data-section="login" style="color: var(--secondary-color);">Login</a>
+                        <a class="nav-link" data-section="register" style="color: var(--secondary-color);">Register</a>
+                    </li>
+                    <li id="userLinks" class="hidden" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="user-badge" id="userBadge" onclick="navigateTo('profile')">
+                            <span id="userName">User</span>
+                            <span class="role-tag" id="userRole">Donor</span>
+                        </span>
+                        <span class="nav-divider">|</span>
+                        <a class="nav-link" data-section="dashboard">Dashboard</a>
+                        <span class="nav-divider">|</span>
+                        <button class="btn-nav btn-nav-outline" onclick="logout()" style="font-size:0.8rem; padding:0.3rem 1rem;">Logout</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="container">
+
+        <!-- -------- HOME -------- -->
+        <section id="home" class="page-section active-section">
+            <div class="hero">
+                <h1>Empowering <span>Tembisa</span> Together</h1>
+                <p>Join The Easy Saturdays Foundation in driving social upliftment through community support, education, and youth empowerment in Ekurhuleni.</p>
+                <div class="hero-actions">
+                    <button class="btn" onclick="navigateTo('campaigns')">View Campaigns</button>
+                    <button class="btn btn-outline" onclick="navigateTo('register')">Get Involved</button>
+                </div>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card"><h3>School Shoes Distributed</h3><div class="number">1,200+</div></div>
+                <div class="dashboard-card"><h3>Winter Hampers Delivered</h3><div class="number">850+</div></div>
+                <div class="dashboard-card"><h3>Active Volunteers</h3><div class="number">200+</div></div>
+            </div>
+        </section>
+
+        <!-- -------- CAMPAIGNS -------- -->
+        <section id="campaigns" class="page-section">
+            <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Active <span style="color: var(--secondary-color);">Campaigns</span></h2>
+            <p style="color: #475569; margin-bottom: 1rem;">Support the drives that are changing lives in our community.</p>
+            <div class="campaign-grid" id="campaignContainer"></div>
+        </section>
+
+        <!-- -------- LOGIN -------- -->
+        <section id="login" class="page-section">
+            <div class="auth-container">
+                <h2>Welcome Back 👋</h2>
+                <p class="subtitle">Login to your account to donate or manage your volunteer activities</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="e.g., johndoe@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <p style="text-align: center; margin-top: 0.8rem; font-size: 0.9rem; color: #64748b;">
+                        Don't have an account? <a href="#" onclick="switchAuthTab('register-donor'); navigateTo('register'); return false;" style="color: var(--primary-color); font-weight: 600;">Register here</a>
+                    </p>
+                    
+                    <!--<p style="text-align: center; margin-top: 0.3rem; font-size: 0.8rem; color: #94a3b8;">
+                        <strong>Demo:</strong> donor@demo.com / password123
+                    </p>-->
+                </form>
+            </div>
+        </section>
+        <!-- -------- REGISTER -------- -->
+        <section id="register" class="page-section">
+            <div class="auth-container">
+                <h2>Create Account ✨</h2>
+                <p class="subtitle">Join the Easy Saturdays community today</p>
+                <div class="auth-tabs">
+                    <div class="auth-tab" data-tab="register-both" onclick="switchAuthTab('register-both')">Both</div>
+                    <div class="auth-tab active" data-tab="register-donor" onclick="switchAuthTab('register-donor')">Donor</div>
+                    <div class="auth-tab" data-tab="register-volunteer" onclick="switchAuthTab('register-volunteer')">Volunteer</div>
+                </div>
+                <!-- Both Registration -->
+                <form id="registerBothForm" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name *</label><input type="text" id="bothFirstName" placeholder="e.g., John" required></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="bothLastName" placeholder="e.g., Doe" required></div>
+                    </div>
+                    <div class="form-group"><label>Email Address *</label><input type="email" id="bothRegEmail" placeholder="e.g., johndoe@email.com" required></div>
+                    <div class="form-group">
+                        <label>Password * (min 8 characters)</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="bothRegPassword" placeholder="Create a strong password" minlength="8" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('bothRegPassword', this)">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password *</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="bothRegConfirmPassword" placeholder="Confirm your password" minlength="8" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('bothRegConfirmPassword', this)">👁️</button>
+                        </div>
+                        <div class="error-msg" id="bothPassMatchError">Passwords do not match</div>
+                    </div>
+                    <div class="form-group"><label>Phone Number *</label><input type="tel" id="bothPhone" placeholder="e.g., 082 123 4567" required></div>
+                    <div class="form-group">
+                        <label>Skills / Areas of Interest</label>
+                        <select id="bothSkills">
+                            <option value="" disabled selected>Select your primary skill</option>
+                            <option value="Event Coordination">Event Coordination</option>
+                            <option value="Logistics & Distribution">Logistics & Distribution</option>
+                            <option value="Marketing & Social Media">Marketing & Social Media</option>
+                            <option value="Fundraising">Fundraising</option>
+                            <option value="Youth Mentorship">Youth Mentorship</option>
+                            <option value="General Support">General Support</option>
+                        </select>
+                    </div>
+                    <div class="checkbox-group"><input type="checkbox" id="bothPopia" required><label for="bothPopia">I consent to my data being stored in accordance with POPIA.</label></div>
+                    <div class="checkbox-group"><input type="checkbox" id="bothTerms" required><label for="bothTerms">I agree to abide by the foundation's Code of Conduct and volunteer policies.</label></div>
+                    <button type="submit" class="btn btn-primary" style="background: #7c3aed;">Register as Donor & Volunteer</button>
+                    <p style="text-align: center; margin-top: 0.8rem; font-size: 0.9rem; color: #64748b;">
+                        Already have an account? <a href="#" onclick="navigateTo('login'); return false;" style="color: var(--primary-color); font-weight: 600;">Login here</a>
+                    </p>
+                </form>
+                <!-- Donor Registration -->
+                <form id="registerDonorForm" class="auth-form active-form">
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name *</label><input type="text" id="donorFirstName" placeholder="e.g., John" required></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="donorLastName" placeholder="e.g.,  Doe" required></div>
+                    </div>
+                    <div class="form-group"><label>Email Address *</label><input type="email" id="donorRegEmail" placeholder="e.g., johndoe@email.com" required></div>
+                    <div class="form-group">
+                        <label>Password * (min 8 characters)</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="donorRegPassword" placeholder="Create a strong password" minlength="8" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('donorRegPassword', this)">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password *</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="donorRegConfirmPassword" placeholder="Confirm your password" minlength="8" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('donorRegConfirmPassword', this)">👁️</button>
+                        </div>
+                        <div class="error-msg" id="donorPassMatchError">Passwords do not match</div>
+                    </div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="donorPhone" placeholder="e.g., 082 123 4567"></div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="donorPopia" required>
+                        <label for="donorPopia">I consent to my data being stored in accordance with POPIA for donation processing and receipting.</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register as Donor</button>
+                    <p style="text-align: center; margin-top: 0.8rem; font-size: 0.9rem; color: #64748b;">
+                        Already have an account? <a href="#" onclick="navigateTo('login'); return false;" style="color: var(--primary-color); font-weight: 600;">Login here</a>
+                    </p>
+                </form>
+                <!-- Volunteer Registration -->
+                <form id="registerVolunteerForm" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name *</label><input type="text" id="volFirstName" placeholder="e.g., John" required></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="volLastName" placeholder="e.g., Doe" required></div>
+                    </div>
+                    <div class="form-group"><label>Email Address *</label><input type="email" id="volRegEmail" placeholder="e.g., johndoe@email.com" required></div>
+                    <div class="form-group">
+                        <label>Password * (min 8 characters)</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="volRegPassword" placeholder="Create a strong password" minlength="8" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('volRegPassword', this)">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password *</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="volRegConfirmPassword" placeholder="Confirm your password" minlength="8" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('volRegConfirmPassword', this)">👁️</button>
+                        </div>
+                        <div class="error-msg" id="volPassMatchError">Passwords do not match</div>
+                    </div>
+                    <div class="form-group"><label>Phone Number *</label><input type="tel" id="volPhone" placeholder="e.g., 082 123 4567" required></div>
+                    <div class="form-group">
+                        <label>Skills / Areas of Interest *</label>
+                        <select id="volSkills" required>
+                            <option value="" disabled selected>Select your primary skill</option>
+                            <option value="Event Coordination">Event Coordination</option>
+                            <option value="Logistics & Distribution">Logistics & Distribution</option>
+                            <option value="Marketing & Social Media">Marketing & Social Media</option>
+                            <option value="Fundraising">Fundraising</option>
+                            <option value="Youth Mentorship">Youth Mentorship</option>
+                            <option value="General Support">General Support</option>
+                        </select>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="volTerms" required>
+                        <label for="volTerms">I agree to abide by the foundation's Code of Conduct and volunteer policies.</label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Register as Volunteer</button>
+                    <p style="text-align: center; margin-top: 0.8rem; font-size: 0.9rem; color: #64748b;">
+                        Already have an account? <a href="#" onclick="navigateTo('login'); return false;" style="color: var(--primary-color); font-weight: 600;">Login here</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <!-- -------- DASHBOARD -------- -->
+        <section id="dashboard" class="page-section">
+            <h2 style="font-size: 1.8rem; margin-bottom: 0.25rem;">Welcome, <span id="dashboardUserName" style="color: var(--secondary-color);">User</span>!</h2>
+            <p style="color: #475569; margin-bottom: 1rem;">Here's an overview of your activity and impact.</p>
+            <!-- Donor Dashboard -->
+            <div id="donorDashboard" class="hidden">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card"><h3>Total Donated</h3><div class="number green">R<span id="totalDonated">0</span></div></div>
+                    <div class="dashboard-card"><h3>Campaigns Supported</h3><div class="number" id="campaignsSupported">0</div></div>
+                    <div class="dashboard-card"><h3>Tax Receipts</h3><div class="number" id="taxReceipts">0</div></div>
+                </div>
+                <div class="card-content">
+                    <h3>Your Donation History</h3>
+                    <div id="donationHistory"><p class="text-muted">No donations recorded yet.</p></div>
+                    <button class="btn btn-success btn-sm mt-2" onclick="navigateTo('campaigns')">Donate Now</button>
+                </div>
+            </div>
+            <!-- Volunteer Dashboard -->
+            <div id="volunteerDashboard" class="hidden">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card"><h3>Hours Contributed</h3><div class="number green" id="volHours">0</div></div>
+                    <div class="dashboard-card"><h3>Shifts Completed</h3><div class="number" id="shiftsCompleted">0</div></div>
+                    <div class="dashboard-card"><h3>Upcoming Shifts</h3><div class="number" id="upcomingShifts">0</div></div>
+                </div>
+                <div class="card-content">
+                    <h3>Your Volunteer Schedule</h3>
+                    <div id="volunteerSchedule"><p class="text-muted">No upcoming shifts.</p></div>
+                    <button class="btn btn-success btn-sm mt-2" onclick="navigateTo('campaigns')">Find Volunteer Opportunities</button>
+                </div>
+            </div>
+            <!-- Both Dashboard -->
+            <div id="bothDashboard" class="hidden">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card"><h3>Total Donated</h3><div class="number green">R<span id="bothTotalDonated">0</span></div></div>
+                    <div class="dashboard-card"><h3>Campaigns Supported</h3><div class="number" id="bothCampaignsSupported">0</div></div>
+                    <div class="dashboard-card"><h3>Hours Contributed</h3><div class="number green" id="bothVolHours">0</div></div>
+                    <div class="dashboard-card"><h3>Upcoming Shifts</h3><div class="number" id="bothUpcomingShifts">0</div></div>
+                </div>
+                <div class="card-content">
+                    <h3>Your Activity Summary</h3>
+                    <div id="bothActivitySummary"><p class="text-muted">You're making a difference as both a donor and a volunteer!</p></div>
+                    <div style="display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:0.8rem;">
+                        <button class="btn btn-success btn-sm" onclick="navigateTo('campaigns')">Donate Now</button>
+                        <button class="btn btn-primary btn-sm" onclick="navigateTo('campaigns')">Find Volunteer Opportunities</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="hidden">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card"><h3>Total Users</h3><div class="number" id="totalUsers">0</div></div>
+                    <div class="dashboard-card"><h3>Total Donations</h3><div class="number green" id="totalDonationsAdmin">0</div></div>
+                    <div class="dashboard-card"><h3>Active Volunteers</h3><div class="number" id="activeVolunteers">0</div></div>
+                </div>
+                <!-- Role Change Requests -->
+                <div class="admin-panel">
+                    <div class="panel-header"><h3>🔄 Role Change Requests</h3></div>
+                    <div id="roleRequestsContainer"><p class="text-muted">No pending role change requests.</p></div>
+                </div>
+                <!-- Manage Campaigns -->
+                <div class="admin-panel">
+                    <div class="panel-header">
+                        <h3>📋 Manage Campaigns</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openCreateCampaignModal()">+ Create Campaign</button>
+                    </div>
+                    <div id="adminCampaignList"><p class="text-muted">No campaigns created yet.</p></div>
+                </div>
+                <!-- View Reports -->
+                <div class="admin-panel">
+                    <div class="panel-header">
+                        <h3>📊 View Reports</h3>
+                        <button class="btn btn-outline btn-sm" onclick="viewReports()">Generate Report</button>
+                    </div>
+                    <div id="reportsContainer"><p class="text-muted">Click "Generate Report" to view analytics.</p></div>
+                </div>
+                <!-- Manage Users -->
+                <div class="admin-panel">
+                    <div class="panel-header"><h3>👥 Manage Users</h3></div>
+                    <div id="adminUserList"><p class="text-muted">Loading users...</p></div>
+                </div>
+                <!-- All Donations -->
+                <div class="admin-panel">
+                    <div class="panel-header"><h3>💰 All Donations</h3></div>
+                    <div id="adminDonationList"><p class="text-muted">Loading donations...</p></div>
+                </div>
+                <!-- All Volunteer Shifts -->
+                <div class="admin-panel">
+                    <div class="panel-header"><h3>🙋 All Volunteer Shifts</h3></div>
+                    <div id="adminVolunteerList"><p class="text-muted">Loading volunteer shifts...</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- -------- PROFILE -------- -->
+        <section id="profile" class="page-section">
+            <div class="auth-container" style="max-width: 550px;">
+                <h2>👤 Edit Profile</h2>
+                <p class="subtitle">Update your personal information</p>
+                <form id="profileForm">
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name *</label><input type="text" id="profileFirstName" required></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="profileLastName" required></div>
+                    </div>
+                    <div class="form-group"><label>Email Address (Cannot be changed)</label><input type="email" id="profileEmail" disabled style="background: #f1f5f9; cursor: not-allowed;"></div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="profilePhone"></div>
+                    <div class="form-group" id="profileSkillsGroup" style="display:none;">
+                        <label>Skills / Areas of Interest</label>
+                        <select id="profileSkills">
+                            <option value="Event Coordination">Event Coordination</option>
+                            <option value="Logistics & Distribution">Logistics & Distribution</option>
+                            <option value="Marketing & Social Media">Marketing & Social Media</option>
+                            <option value="Fundraising">Fundraising</option>
+                            <option value="Youth Mentorship">Youth Mentorship</option>
+                            <option value="General Support">General Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="border-top: 2px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem;">
+                        <label style="font-size: 1rem; color: var(--primary-color);">Request Role Change</label>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 0.5rem;">Request to change your role. Admin approval required.</p>
+                        <div class="form-row">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="profileRequestedRole">Requested Role</label>
+                                <select id="profileRequestedRole">
+                                    <option value="">Select a role...</option>
+                                    <option value="donor">Donor</option>
+                                    <option value="volunteer">Volunteer</option>
+                                    <option value="both">Both (Donor & Volunteer)</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end;">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="requestRoleChange()" style="width:100%;">Submit Request</button>
+                            </div>
+                        </div>
+                        <div id="roleRequestStatus" style="margin-top: 0.5rem; font-size: 0.85rem;"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+                    <button type="button" class="btn btn-outline mt-1" onclick="navigateTo('dashboard')">Cancel</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- -------- PAYMENT -------- -->
+        <section id="payment" class="page-section">
+            <div class="payment-container">
+                <div class="payment-header">
+                    <h2>💳 Secure Payment</h2>
+                    <p class="text-muted">Your donation makes a real difference</p>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.2rem; flex-wrap: wrap;">
+                        <span class="currency-symbol">R</span>
+                        <input type="number" id="paymentAmountInput" class="amount-input" value="50" min="50" step="10" onchange="updatePaymentSummary()" oninput="updatePaymentSummary()">
+                    </div>
+                    <p style="font-size: 0.85rem; color: #64748b;">Campaign: <span id="paymentCampaign">Community Food Drive</span></p>
+                    <p style="font-size: 0.8rem; color: #94a3b8;">Minimum: R50 | Remaining: R<span id="paymentRemaining">0</span></p>
+                    <div class="payment-amount-actions">
+                        <button class="btn btn-sm btn-outline" onclick="setPaymentAmount(100)">R100</button>
+                        <button class="btn btn-sm btn-outline" onclick="setPaymentAmount(250)">R250</button>
+                        <button class="btn btn-sm btn-outline" onclick="setPaymentAmount(500)">R500</button>
+                        <button class="btn btn-sm btn-success" onclick="setPaymentAmount('max')">🔥 Donate Max</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method selected" onclick="selectPaymentMethod(this)"><div class="icon">💳</div><div class="name">Credit/Debit Card</div></div>
+                        <div class="payment-method" onclick="selectPaymentMethod(this)"><div class="icon">🏦</div><div class="name">Instant EFT</div></div>
+                        <div class="payment-method" onclick="selectPaymentMethod(this)"><div class="icon">📱</div><div class="name">Mobile Money</div></div>
+                        <div class="payment-method" onclick="selectPaymentMethod(this)"><div class="icon">💰</div><div class="name">Cash Drop-off</div></div>
+                    </div>
+                </div>
+                <div id="cardDetails">
+                    <div class="form-group"><label>Card Number</label><input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Expiry Date</label><input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"></div>
+                        <div class="form-group"><label>CVV</label><input type="password" id="cardCvv" placeholder="***" maxlength="4" style="width: 100px;"></div>
+                    </div>
+                    <div class="form-group"><label>Name on Card</label><input type="text" id="cardName" placeholder="John Doe"></div>
+                </div>
+                <div class="payment-summary">
+                    <div class="row"><span>Donation Amount</span><span>R<span id="summaryAmount">50.00</span></span></div>
+                    <div class="row"><span>Processing Fee</span><span>R0.00</span></div>
+                    <div class="row total"><span>Total</span><span>R<span id="summaryTotal">50.00</span></span></div>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="paymentTerms" required>
+                    <label for="paymentTerms">I confirm this donation is made in good faith and consent to POPIA data processing.</label>
+                </div>
+                <button class="btn btn-success" onclick="processPayment()">✅ Complete Donation</button>
+                <button class="btn btn-outline mt-1" onclick="navigateTo('campaigns')">Cancel</button>
+            </div>
+        </section>
+
+        <!-- -------- VOLUNTEER DETAIL -------- -->
+        <section id="volunteerDetail" class="page-section">
+            <h2 style="font-size: 1.8rem; margin-bottom: 0.25rem;">📋 Volunteer <span style="color: var(--secondary-color);">Opportunity</span></h2>
+            <p style="color: #475569; margin-bottom: 1rem;">Review the details and select your shift time before signing up</p>
+            <div class="volunteer-detail-card" id="volunteerDetailContent">
+                <div class="detail-row"><span class="detail-label">Campaign</span><span class="detail-value" id="vdCampaign">-</span></div>
+                <div class="detail-row"><span class="detail-label">Description</span><span class="detail-value" id="vdDescription">-</span></div>
+                <div class="detail-row">
+                    <span class="detail-label">Date *</span>
+                    <span class="detail-value">
+                        <input type="date" id="vdDate" min="" max="">
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Shift Time *</span>
+                    <span class="detail-value">
+                        <select id="vdTime">
+                            <option value="">Select a shift time...</option>
+                            <option value="08:00 - 12:00">08:00 - 12:00 (Morning)</option>
+                            <option value="13:00 - 17:00">13:00 - 17:00 (Afternoon)</option>
+                        </select>
+                    </span>
+                </div>
+                <div class="detail-row"><span class="detail-label">Venue / Location</span><span class="detail-value" id="vdLocation">-</span></div>
+                <div class="detail-row"><span class="detail-label">Volunteers Needed</span><span class="detail-value" id="vdNeeded">-</span></div>
+                <div class="detail-row"><span class="detail-label">Skills Required</span><span class="detail-value" id="vdSkills">-</span></div>
+                <div class="detail-row"><span class="detail-label">What to Bring</span><span class="detail-value" id="vdBring">-</span></div>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                <button class="btn btn-success" id="vdSignupBtn" onclick="confirmVolunteerSignup()">✅ Sign Up for This Shift</button>
+                <button class="btn btn-outline" onclick="navigateTo('campaigns')">← Back to Campaigns</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 The Easy Saturdays Foundation. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalIcon">✅</h2>
+            <h2 id="modalTitle">Thank You!</h2>
+            <p id="modalMessage">Your action has been successfully completed.</p>
+            <div class="modal-actions"><button class="btn btn-success" onclick="closeModal()">Continue</button></div>
+        </div>
+    </div>
+
+    <div id="createCampaignModal" class="modal">
+        <div class="modal-content">
+            <h2>📢 Create New Campaign</h2>
+            <p class="modal-subtitle">Fill in the details to launch a new community drive</p>
+            <form id="createCampaignForm">
+                <div class="form-group"><label>Campaign Title *</label><input type="text" id="campTitle" placeholder="e.g., Back-2-School 2026" required></div>
+                <div class="form-group"><label>Description *</label><textarea id="campDescription" rows="3" placeholder="Describe the campaign and its impact" required></textarea></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Goal Amount (R) *</label><input type="number" id="campGoal" placeholder="50000" required></div>
+                    <div class="form-group"><label>Volunteers Needed</label><input type="number" id="campVolunteers" placeholder="10" value="10"></div>
+                </div>
+                <div class="form-group"><label>Campaign End Type</label>
+                    <select id="campEndType">
+                        <option value="date">End on Specific Date</option>
+                        <option value="goal">End When Goal Reached</option>
+                    </select>
+                </div>
+                <div class="form-row" id="campDateRow">
+                    <div class="form-group"><label>Start Date</label><input type="date" id="campStartDate"></div>
+                    <div class="form-group"><label>End Date</label><input type="date" id="campEndDate"></div>
+                </div>
+                <div class="form-group">
+                    <label>Campaign Status</label>
+                    <select id="campStatus">
+                        <option value="active">Active</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Create Campaign</button>
+                    <button type="button" class="btn btn-outline" onclick="closeCampaignModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Campaign Modal -->
+    <div id="editCampaignModal" class="modal">
+        <div class="modal-content">
+            <h2>✏️ Edit Campaign</h2>
+            <p class="modal-subtitle">Update campaign details</p>
+            <form id="editCampaignForm">
+                <input type="hidden" id="editCampaignId">
+                <div class="form-group"><label>Campaign Title *</label><input type="text" id="editCampTitle" required></div>
+                <div class="form-group"><label>Description *</label><textarea id="editCampDescription" rows="3" required></textarea></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Goal Amount (R) *</label><input type="number" id="editCampGoal" required></div>
+                    <div class="form-group"><label>Volunteers Needed</label><input type="number" id="editCampVolunteers"></div>
+                </div>
+                <div class="form-group"><label>Status</label>
+                    <select id="editCampStatus">
+                        <option value="active">Active</option>
+                        <option value="ended">Ended</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline" onclick="closeEditCampaignModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editUserModal" class="modal">
+        <div class="modal-content">
+            <h2>✏️ Edit User</h2>
+            <p class="modal-subtitle">Update user details (password will be hashed)</p>
+            <form id="editUserForm">
+                <input type="hidden" id="editUserId">
+                <div class="form-row">
+                    <div class="form-group"><label>First Name *</label><input type="text" id="editUserFirstName" required></div>
+                    <div class="form-group"><label>Last Name *</label><input type="text" id="editUserLastName" required></div>
+                </div>
+                <div class="form-group"><label>Email</label><input type="email" id="editUserEmail" disabled style="background: #f1f5f9; cursor: not-allowed;"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" id="editUserPhone"></div>
+                <div class="form-group"><label>Role</label>
+                    <select id="editUserRole">
+                        <option value="donor">Donor</option>
+                        <option value="volunteer">Volunteer</option>
+                        <option value="both">Both</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>New Password (leave blank to keep current)</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="editUserPassword" placeholder="Enter new password">
+                        <button type="button" class="toggle-password" onclick="togglePassword('editUserPassword', this)">👁️</button>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline" onclick="closeEditUserModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATA STORE ---
+            const DB = {
+                users: JSON.parse(localStorage.getItem('esdp_users')) || [],
+                campaigns: JSON.parse(localStorage.getItem('esdp_campaigns')) || [],
+                donations: JSON.parse(localStorage.getItem('esdp_donations')) || [],
+                volunteerShifts: JSON.parse(localStorage.getItem('esdp_shifts')) || [],
+                roleRequests: JSON.parse(localStorage.getItem('esdp_role_requests')) || [],
+                currentUser: JSON.parse(localStorage.getItem('esdp_current_user')) || null
+            };
+
+            // --- SAVE FUNCTIONS ---
+            function saveUsers() { localStorage.setItem('esdp_users', JSON.stringify(DB.users)); }
+
+            function saveCampaigns() { localStorage.setItem('esdp_campaigns', JSON.stringify(DB.campaigns)); }
+
+            function saveDonations() { localStorage.setItem('esdp_donations', JSON.stringify(DB.donations)); }
+
+            function saveShifts() { localStorage.setItem('esdp_shifts', JSON.stringify(DB.volunteerShifts)); }
+
+            function saveRoleRequests() { localStorage.setItem('esdp_role_requests', JSON.stringify(DB.roleRequests)); }
+
+            function saveCurrentUser() { localStorage.setItem('esdp_current_user', JSON.stringify(DB.currentUser)); }
+
+            // --- HASH PASSWORD (Simple hash for demo) ---
+            function hashPassword(password) {
+                // Simple hash for demo - in production use bcrypt
+                let hash = 0;
+                for (let i = 0; i < password.length; i++) {
+                    const char = password.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return 'hashed_' + hash.toString(36) + '_' + btoa(password).slice(0, 10);
+            }
+
+            // --- INIT DEMO DATA ---
+            function initDemoData() {
+                if (DB.users.length === 0) {
+                    DB.users = [
+                        { id: 1001, firstName: 'Demo', lastName: 'Donor', email: 'donor@demo.com', password: hashPassword(
+                                'password123'), phone: '082 123 4567', role: 'donor', totalDonated: 1250,
+                            campaignsSupported: 3, taxReceipts: 3, createdAt: new Date().toISOString() },
+                        { id: 1002, firstName: 'Demo', lastName: 'Volunteer', email: 'volunteer@demo.com',
+                            password: hashPassword('password123'), phone: '082 765 4321', role: 'volunteer',
+                            skills: 'Event Coordination', hoursContributed: 12, shiftsCompleted: 4, upcomingShifts: 2,
+                            createdAt: new Date().toISOString() },
+                        { id: 1003, firstName: 'Admin', lastName: 'User', email: 'admin@demo.com', password: hashPassword(
+                                'password123'), phone: '083 555 5555', role: 'admin', createdAt: new Date()
+                            .toISOString() }
+                    ];
+                    saveUsers();
+                }
+
+                if (DB.campaigns.length === 0) {
+                    DB.campaigns = [
+                        { id: 1, title: 'Back-2-School 2026', description: 'Help us provide school shoes and uniforms to 500+ children in Tembisa.',
+                            goal: 50000, raised: 31200,
+                            image: 'https://placehold.co/600x400/1e3a8a/ffffff?text=Back+2+School', volunteersNeeded: 15,
+                            startDate: '2026-01-01', endDate: '2026-01-20', endType: 'date', status: 'active',
+                            location: 'Tembisa Primary School', skills: 'Distribution, Logistics',
+                            bring: 'Comfortable shoes, water bottle' },
+                        { id: 2, title: 'Winter Warmth 2026', description: 'Ensure our senior citizens and vulnerable families have warm food and blankets.',
+                            goal: 75000, raised: 48900,
+                            image: 'https://placehold.co/600x400/f59e0b/1e293b?text=Winter+Warmth',
+                            volunteersNeeded: 20, startDate: '2026-05-01', endDate: '2026-06-15', endType: 'date',
+                            status: 'active', location: 'The Parks 1632', skills: 'Event Coordination, Packing',
+                            bring: 'Warm jacket, gloves' },
+                        { id: 3, title: 'Community Food Drive', description: 'Stock the local food bank to support 200+ families facing food insecurity.',
+                            goal: 30000, raised: 21050,
+                            image: 'https://placehold.co/600x400/10b981/ffffff?text=Food+Drive', volunteersNeeded: 10,
+                            startDate: '2026-02-01', endDate: '2026-03-10', endType: 'date', status: 'active',
+                            location: 'Tembisa Community Hall', skills: 'Packing, Sorting', bring: 'Gloves, mask' }
+                        { id: 4, title: 'Tebza Needs', description: 'Help Tebza become the first Billionaire in his family.',
+                            goal: 1000000000, raised: 1050,
+                            image: 'https://placehold.co/600x400/10b981/ffffff?text=money', volunteersNeeded: 10,
+                            startDate: '2026-08-05', endDate: '2027-08-05', endType: 'date', status: 'active',
+                            location: 'Earth', skills: 'Investing', bring: 'Money, Laptops, Mobile devices' }
+                    ];
+                    saveCampaigns();
+                }
+
+                if (DB.volunteerShifts.length === 0) {
+                    DB.volunteerShifts = [
+                        { id: 1, volunteerId: 1002, campaignId: 1, date: '2026-01-20', time: '08:00 - 12:00',
+                            status: 'completed' },
+                        { id: 2, volunteerId: 1002, campaignId: 2, date: '2026-06-15', time: '13:00 - 17:00',
+                            status: 'upcoming' },
+                        { id: 3, volunteerId: 1002, campaignId: 3, date: '2026-03-10', time: '08:00 - 12:00',
+                            status: 'upcoming' }
+                    ];
+                    saveShifts();
+                }
+
+                if (DB.donations.length === 0) {
+                    DB.donations = [
+                        { id: 1, donorId: 1001, campaignId: 1, amount: 500, date: '2026-01-15', method: 'Credit Card',
+                            status: 'completed' },
+                        { id: 2, donorId: 1001, campaignId: 2, amount: 250, date: '2026-06-10', method: 'Instant EFT',
+                            status: 'completed' },
+                        { id: 3, donorId: 1001, campaignId: 3, amount: 200, date: '2026-03-05', method: 'Cash',
+                            status: 'completed' }
+                    ];
+                    saveDonations();
+                }
+
+                if (DB.roleRequests.length === 0) {
+                    DB.roleRequests = [];
+                    saveRoleRequests();
+                }
+            }
+
+            initDemoData();
+
+            // --- NAVIGATION ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.page-section');
+
+            window.navigateTo = function(sectionId) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+
+                sections.forEach(section => section.classList.remove('active-section'));
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) targetSection.classList.add('active-section');
+
+                if (sectionId === 'profile') loadProfile();
+                if (sectionId === 'dashboard') updateDashboard();
+                if (sectionId === 'campaigns') renderCampaigns();
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = link.dataset.section;
+                    navigateTo(sectionId);
+                });
+            });
+
+            // --- TOGGLE PASSWORD ---
+            window.togglePassword = function(inputId, btn) {
+                const input = document.getElementById(inputId);
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    btn.textContent = '🙈';
+                } else {
+                    input.type = 'password';
+                    btn.textContent = '👁️';
+                }
+            };
+
+            // --- SWITCH AUTH TABS ---
+            window.switchAuthTab = function(tabId) {
+                document.querySelectorAll('.auth-tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active-form'));
+
+                document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+
+                if (tabId === 'register-donor') {
+                    document.getElementById('registerDonorForm').classList.add('active-form');
+                } else if (tabId === 'register-volunteer') {
+                    document.getElementById('registerVolunteerForm').classList.add('active-form');
+                } else if (tabId === 'register-both') {
+                    document.getElementById('registerBothForm').classList.add('active-form');
+                }
+            };
+
+            // --- RENDER CAMPAIGNS ---
+            function renderCampaigns() {
+                const container = document.getElementById('campaignContainer');
+                const activeCampaigns = DB.campaigns.filter(c => c.status === 'active');
+                if (activeCampaigns.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No active campaigns at the moment. Check back soon!</p>';
+                    return;
+                }
+                container.innerHTML = activeCampaigns.map(campaign => {
+                    const percentage = Math.min(100, (campaign.raised / campaign.goal) * 100);
+                    const remaining = campaign.goal - campaign.raised;
+                    return `
+                        <div class="campaign-card">
+                            <img src="${campaign.image}" alt="${campaign.title}" onerror="this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=Campaign'">
+                            <div class="content">
+                                <h3>${campaign.title}</h3>
+                                <p class="meta">${campaign.description}</p>
+                                <div class="progress-bar"><div class="progress-fill" style="width: ${percentage}%;"></div></div>
+                                <div class="campaign-stats">
+                                    <span>Raised: R${campaign.raised.toLocaleString()}</span>
+                                    <span>Goal: R${campaign.goal.toLocaleString()}</span>
+                                </div>
+                                <div style="font-size:0.8rem;color:#64748b;margin-top:0.3rem;">Remaining: R${remaining.toLocaleString()}</div>
+                                <div class="campaign-actions">
+                                    <button class="btn btn-success btn-sm" onclick="openPayment(${campaign.id})">💳 Donate</button>
+                                    <button class="btn btn-sm" style="background:#e2e8f0;color:#1e293b;" onclick="showVolunteerDetail(${campaign.id})">🙋 Volunteer</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            renderCampaigns();
+
+            // --- REGISTRATION HANDLERS ---
+            function handleRegistration(formId, role, extraData = {}) {
+                const form = document.getElementById(formId);
+                if (!form) return;
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form data based on form ID
+                    let firstName, lastName, email, password, confirmPassword, phone, skills, popia, terms;
+
+                    if (formId === 'registerDonorForm') {
+                        firstName = document.getElementById('donorFirstName').value.trim();
+                        lastName = document.getElementById('donorLastName').value.trim();
+                        email = document.getElementById('donorRegEmail').value.trim();
+                        password = document.getElementById('donorRegPassword').value;
+                        confirmPassword = document.getElementById('donorRegConfirmPassword').value;
+                        phone = document.getElementById('donorPhone').value.trim();
+                        popia = document.getElementById('donorPopia').checked;
+                        if (password !== confirmPassword) {
+                            document.getElementById('donorPassMatchError').classList.add('show');
+                            return;
+                        }
+                        document.getElementById('donorPassMatchError').classList.remove('show');
+                        if (!popia) { showModal('⚠️', 'POPIA Consent Required',
+                            'Please consent to POPIA.'); return; }
+                    } else if (formId === 'registerVolunteerForm') {
+                        firstName = document.getElementById('volFirstName').value.trim();
+                        lastName = document.getElementById('volLastName').value.trim();
+                        email = document.getElementById('volRegEmail').value.trim();
+                        password = document.getElementById('volRegPassword').value;
+                        confirmPassword = document.getElementById('volRegConfirmPassword').value;
+                        phone = document.getElementById('volPhone').value.trim();
+                        skills = document.getElementById('volSkills').value;
+                        terms = document.getElementById('volTerms').checked;
+                        if (password !== confirmPassword) {
+                            document.getElementById('volPassMatchError').classList.add('show');
+                            return;
+                        }
+                        document.getElementById('volPassMatchError').classList.remove('show');
+                        if (!terms) { showModal('⚠️', 'Terms Required', 'Please agree to the Code of Conduct.'); return; }
+                    } else if (formId === 'registerBothForm') {
+                        firstName = document.getElementById('bothFirstName').value.trim();
+                        lastName = document.getElementById('bothLastName').value.trim();
+                        email = document.getElementById('bothRegEmail').value.trim();
+                        password = document.getElementById('bothRegPassword').value;
+                        confirmPassword = document.getElementById('bothRegConfirmPassword').value;
+                        phone = document.getElementById('bothPhone').value.trim();
+                        skills = document.getElementById('bothSkills').value;
+                        popia = document.getElementById('bothPopia').checked;
+                        terms = document.getElementById('bothTerms').checked;
+                        if (password !== confirmPassword) {
+                            document.getElementById('bothPassMatchError').classList.add('show');
+                            return;
+                        }
+                        document.getElementById('bothPassMatchError').classList.remove('show');
+                        if (!popia) { showModal('⚠️', 'POPIA Consent Required', 'Please consent to POPIA.'); return; }
+                        if (!terms) { showModal('⚠️', 'Terms Required', 'Please agree to the Code of Conduct.'); return; }
+                    }
+
+                    if (DB.users.find(u => u.email === email)) {
+                        showModal('⚠️', 'Email Already Registered', 'This email is already registered.');
+                        return;
+                    }
+
+                    const newUser = {
+                        id: Date.now(),
+                        firstName,
+                        lastName,
+                        email,
+                        password: hashPassword(password),
+                        phone,
+                        role: role,
+                        skills: skills || 'General Support',
+                        totalDonated: 0,
+                        campaignsSupported: 0,
+                        taxReceipts: 0,
+                        hoursContributed: 0,
+                        shiftsCompleted: 0,
+                        upcomingShifts: 0,
+                        createdAt: new Date().toISOString(),
+                        ...extraData
+                    };
+
+                    DB.users.push(newUser);
+                    saveUsers();
+                    DB.currentUser = newUser;
+                    saveCurrentUser();
+                    updateUIForAuth();
+                    const roleName = role === 'both' ? 'donor and volunteer' : role;
+                    showModal('🎉', 'Registration Successful!',
+                        `Welcome to the Easy Saturdays community, ${firstName}! You are now a ${roleName}.`);
+                    form.reset();
+                    navigateTo('dashboard');
+                });
+            }
+
+            handleRegistration('registerDonorForm', 'donor');
+            handleRegistration('registerVolunteerForm', 'volunteer');
+            handleRegistration('registerBothForm', 'both');
+
+            // --- LOGIN ---
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                const hashed = hashPassword(password);
+
+                const user = DB.users.find(u => u.email === email && u.password === hashed);
+
+                if (!user) {
+                    // Check if using old password format (for demo compatibility)
+                    const oldUser = DB.users.find(u => u.email === email && u.password === btoa(password));
+                    if (oldUser) {
+                        // Upgrade to hashed password
+                        oldUser.password = hashed;
+                        saveUsers();
+                        DB.currentUser = oldUser;
+                        saveCurrentUser();
+                        updateUIForAuth();
+                        showModal('👋', 'Welcome Back!', `Good to see you again, ${oldUser.firstName}!`);
+                        this.reset();
+                        navigateTo('dashboard');
+                        return;
+                    }
+                    showModal('⚠️', 'Login Failed', 'Invalid email or password. Please try again.');
+                    return;
+                }
+
+                DB.currentUser = user;
+                saveCurrentUser();
+                updateUIForAuth();
+                showModal('👋', 'Welcome Back!', `Good to see you again, ${user.firstName}!`);
+                this.reset();
+                navigateTo('dashboard');
+            });
+
+            // --- LOGOUT ---
+            window.logout = function() {
+                DB.currentUser = null;
+                saveCurrentUser();
+                updateUIForAuth();
+                showModal('👋', 'Logged Out', 'You have been successfully logged out.');
+                navigateTo('home');
+            };
+
+            // --- UPDATE UI FOR AUTH ---
+            function updateUIForAuth() {
+                const guestLinks = document.getElementById('guestLinks');
+                const userLinks = document.getElementById('userLinks');
+
+                if (DB.currentUser) {
+                    guestLinks.classList.add('hidden');
+                    userLinks.classList.remove('hidden');
+                    userLinks.style.display = 'flex';
+                    document.getElementById('userName').textContent = DB.currentUser.firstName + ' ' + DB.currentUser
+                        .lastName;
+                    let roleDisplay = DB.currentUser.role;
+                    if (roleDisplay === 'both') roleDisplay = 'Donor+Volunteer';
+                    else roleDisplay = roleDisplay.charAt(0).toUpperCase() + roleDisplay.slice(1);
+                    document.getElementById('userRole').textContent = roleDisplay;
+                } else {
+                    guestLinks.classList.remove('hidden');
+                    userLinks.classList.add('hidden');
+                    userLinks.style.display = 'none';
+                }
+                if (document.getElementById('dashboard').classList.contains('active-section')) {
+                    updateDashboard();
+                }
+                renderRoleRequests();
+            }
+
+            // --- UPDATE DASHBOARD ---
+            function updateDashboard() {
+                if (!DB.currentUser) return;
+                const user = DB.currentUser;
+                document.getElementById('dashboardUserName').textContent = user.firstName;
+
+                document.getElementById('donorDashboard').classList.add('hidden');
+                document.getElementById('volunteerDashboard').classList.add('hidden');
+                document.getElementById('bothDashboard').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.add('hidden');
+
+                if (user.role === 'donor') {
+                    document.getElementById('donorDashboard').classList.remove('hidden');
+                    document.getElementById('totalDonated').textContent = user.totalDonated || 0;
+                    document.getElementById('campaignsSupported').textContent = user.campaignsSupported || 0;
+                    document.getElementById('taxReceipts').textContent = user.taxReceipts || 0;
+                    renderDonationHistory();
+                } else if (user.role === 'volunteer') {
+                    document.getElementById('volunteerDashboard').classList.remove('hidden');
+                    document.getElementById('volHours').textContent = user.hoursContributed || 0;
+                    document.getElementById('shiftsCompleted').textContent = user.shiftsCompleted || 0;
+                    const upcoming = DB.volunteerShifts.filter(s => s.volunteerId === user.id && s.status === 'upcoming')
+                        .length;
+                    document.getElementById('upcomingShifts').textContent = upcoming;
+                    renderVolunteerSchedule();
+                } else if (user.role === 'both') {
+                    document.getElementById('bothDashboard').classList.remove('hidden');
+                    document.getElementById('bothTotalDonated').textContent = user.totalDonated || 0;
+                    document.getElementById('bothCampaignsSupported').textContent = user.campaignsSupported || 0;
+                    document.getElementById('bothVolHours').textContent = user.hoursContributed || 0;
+                    const upcoming = DB.volunteerShifts.filter(s => s.volunteerId === user.id && s.status === 'upcoming')
+                        .length;
+                    document.getElementById('bothUpcomingShifts').textContent = upcoming;
+                    renderBothActivitySummary();
+                } else if (user.role === 'admin') {
+                    document.getElementById('adminDashboard').classList.remove('hidden');
+                    const totalDonations = DB.donations.reduce((sum, d) => sum + d.amount, 0);
+                    document.getElementById('totalUsers').textContent = DB.users.length;
+                    document.getElementById('totalDonationsAdmin').textContent = totalDonations.toLocaleString();
+                    document.getElementById('activeVolunteers').textContent = DB.users.filter(u => u.role === 'volunteer' ||
+                        u.role === 'both').length;
+                    renderAdminCampaigns();
+                    renderAdminUsers();
+                    renderRoleRequests();
+                    renderAdminDonations();
+                    renderAdminVolunteers();
+                }
+            }
+
+            // --- RENDER DONATION HISTORY ---
+            function renderDonationHistory() {
+                const container = document.getElementById('donationHistory');
+                const userDonations = DB.donations.filter(d => d.donorId === DB.currentUser.id);
+                if (userDonations.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No donations recorded yet.</p>';
+                    return;
+                }
+                let html =
+                    '<div class="table-container"><table><thead><tr><th>Campaign</th><th>Amount</th><th>Date</th><th>Method</th></tr></thead><tbody>';
+                userDonations.forEach(d => {
+                    const campaign = DB.campaigns.find(c => c.id === d.campaignId);
+                    html +=
+                        `<tr><td>${campaign ? campaign.title : 'Unknown'}</td><td>R${d.amount}</td><td>${d.date}</td><td>${d.method}</td></tr>`;
+                });
+                html += '</tbody></table></div>';
+                container.innerHTML = html;
+            }
+
+            // --- RENDER VOLUNTEER SCHEDULE ---
+            function renderVolunteerSchedule() {
+                const container = document.getElementById('volunteerSchedule');
+                const userShifts = DB.volunteerShifts.filter(s => s.volunteerId === DB.currentUser.id);
+                if (userShifts.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No upcoming shifts.</p>';
+                    return;
+                }
+                let html =
+                    '<div class="table-container"><table><thead><tr><th>Campaign</th><th>Date</th><th>Time</th><th>Status</th></tr></thead><tbody>';
+                userShifts.forEach(s => {
+                    const campaign = DB.campaigns.find(c => c.id === s.campaignId);
+                    const statusClass = s.status === 'upcoming' ? 'upcoming' : s.status === 'completed' ? 'completed' :
+                        'cancelled';
+                    html +=
+                        `<tr><td>${campaign ? campaign.title : 'Unknown'}</td><td>${s.date}</td><td>${s.time}</td><td><span class="status-badge ${statusClass}">${s.status}</span></td></tr>`;
+                });
+                html += '</tbody></table></div>';
+                container.innerHTML = html;
+            }
+
+            // --- RENDER BOTH ACTIVITY SUMMARY ---
+            function renderBothActivitySummary() {
+                const container = document.getElementById('bothActivitySummary');
+                const userDonations = DB.donations.filter(d => d.donorId === DB.currentUser.id);
+                const userShifts = DB.volunteerShifts.filter(s => s.volunteerId === DB.currentUser.id);
+                let html = '';
+                if (userDonations.length > 0) {
+                    html +=
+                        `<p>✅ <strong>${userDonations.length}</strong> donation(s) made, totaling <strong>R${DB.currentUser.totalDonated || 0}</strong></p>`;
+                }
+                if (userShifts.length > 0) {
+                    const completed = userShifts.filter(s => s.status === 'completed').length;
+                    const upcoming = userShifts.filter(s => s.status === 'upcoming').length;
+                    html +=
+                        `<p>🙋 <strong>${completed}</strong> shift(s) completed, <strong>${upcoming}</strong> upcoming</p>`;
+                }
+                if (!html) {
+                    html = '<p class="text-muted">You\'re making a difference as both a donor and a volunteer!</p>';
+                }
+                container.innerHTML = html;
+            }
+
+            // --- ADMIN: ROLE CHANGE REQUESTS ---
+            function renderRoleRequests() {
+                const container = document.getElementById('roleRequestsContainer');
+                if (!container) return;
+                const pendingRequests = DB.roleRequests.filter(r => r.status === 'pending');
+                if (pendingRequests.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No pending role change requests.</p>';
+                    return;
+                }
+                let html = '';
+                pendingRequests.forEach(req => {
+                    const user = DB.users.find(u => u.id === req.userId);
+                    if (!user) return;
+                    html += `
+                        <div class="role-request-card">
+                            <div class="request-info">
+                                <div class="name">${user.firstName} ${user.lastName}</div>
+                                <div class="details">
+                                    Current: <strong>${req.currentRole}</strong> → Requested: <strong>${req.requestedRole}</strong>
+                                    <br>Requested on: ${new Date(req.requestedAt).toLocaleString()}
+                                </div>
+                            </div>
+                            <div class="request-actions">
+                                <button class="btn btn-success btn-sm" onclick="approveRoleRequest(${req.id})">✅ Approve</button>
+                                <button class="btn btn-danger btn-sm" onclick="rejectRoleRequest(${req.id})">❌ Reject</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            }
+
+            window.approveRoleRequest = function(requestId) {
+                const request = DB.roleRequests.find(r => r.id === requestId);
+                if (!request) return;
+                const user = DB.users.find(u => u.id === request.userId);
+                if (!user) return;
+                user.role = request.requestedRole;
+                saveUsers();
+                request.status = 'approved';
+                saveRoleRequests();
+                if (DB.currentUser && DB.currentUser.id === user.id) {
+                    DB.currentUser = user;
+                    saveCurrentUser();
+                    updateUIForAuth();
+                }
+                renderRoleRequests();
+                renderAdminUsers();
+                showModal('✅', 'Role Approved!', `${user.firstName} is now a ${request.requestedRole}.`);
+            };
+
+            window.rejectRoleRequest = function(requestId) {
+                const request = DB.roleRequests.find(r => r.id === requestId);
+                if (!request) return;
+                request.status = 'rejected';
+                saveRoleRequests();
+                renderRoleRequests();
+                showModal('❌', 'Request Rejected', 'The role change request has been rejected.');
+            };
+
+            // --- ADMIN: RENDER ALL DONATIONS with SORT & FILTER ---
+            function renderAdminDonations() {
+                const container = document.getElementById('adminDonationList');
+                if (DB.donations.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No donations recorded yet.</p>';
+                    return;
+                }
+
+                // Build filter UI
+                let filterHtml = `
+                    <div class="table-filters">
+                        <span class="filter-label">🔍 Filter:</span>
+                        <select id="donationFilterCampaign" onchange="applyDonationFilters()">
+                            <option value="all">All Campaigns</option>
+                            ${DB.campaigns.map(c => `<option value="${c.id}">${c.title}</option>`).join('')}
+                        </select>
+                        <select id="donationFilterMethod" onchange="applyDonationFilters()">
+                            <option value="all">All Methods</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Instant EFT">Instant EFT</option>
+                            <option value="Mobile Money">Mobile Money</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Cash Drop-off">Cash Drop-off</option>
+                        </select>
+                        <input type="text" id="donationFilterDonor" placeholder="Search donor..." oninput="applyDonationFilters()">
+                        <span class="filter-label">Sort by:</span>
+                        <select id="donationSort" onchange="applyDonationFilters()">
+                            <option value="date-desc">Date (Newest)</option>
+                            <option value="date-asc">Date (Oldest)</option>
+                            <option value="amount-desc">Amount (Highest)</option>
+                            <option value="amount-asc">Amount (Lowest)</option>
+                        </select>
+                    </div>
+                `;
+
+                let donationsData = [...DB.donations];
+                let html = filterHtml;
+                html += '<div class="table-container"><table><thead><tr><th>Donor</th><th>Campaign</th><th>Amount</th><th>Date</th><th>Method</th></tr></thead><tbody id="donationTableBody">';
+                donationsData.forEach(d => {
+                    const donor = DB.users.find(u => u.id === d.donorId);
+                    const campaign = DB.campaigns.find(c => c.id === d.campaignId);
+                    html += `<tr>
+                        <td>${donor ? donor.firstName + ' ' + donor.lastName : 'Unknown'}</td>
+                        <td>${campaign ? campaign.title : 'Unknown'}</td>
+                        <td>R${d.amount}</td>
+                        <td>${d.date}</td>
+                        <td>${d.method}</td>
+                    </tr>`;
+                });
+                html += '</tbody></table></div>';
+                container.innerHTML = html;
+
+                // Store data for filtering
+                container._donationsData = DB.donations;
+                applyDonationFilters();
+            }
+
+            window.applyDonationFilters = function() {
+                const container = document.getElementById('adminDonationList');
+                const campaignFilter = document.getElementById('donationFilterCampaign')?.value || 'all';
+                const methodFilter = document.getElementById('donationFilterMethod')?.value || 'all';
+                const donorSearch = document.getElementById('donationFilterDonor')?.value?.toLowerCase() || '';
+                const sort = document.getElementById('donationSort')?.value || 'date-desc';
+
+                let data = [...DB.donations];
+
+                // Apply filters
+                if (campaignFilter !== 'all') {
+                    data = data.filter(d => d.campaignId === parseInt(campaignFilter));
+                }
+                if (methodFilter !== 'all') {
+                    data = data.filter(d => d.method === methodFilter);
+                }
+                if (donorSearch) {
+                    data = data.filter(d => {
+                        const donor = DB.users.find(u => u.id === d.donorId);
+                        return donor && (donor.firstName.toLowerCase().includes(donorSearch) || donor.lastName
+                            .toLowerCase().includes(donorSearch));
+                    });
+                }
+
+                // Apply sort
+                data.sort((a, b) => {
+                    switch (sort) {
+                        case 'date-desc':
+                            return new Date(b.date) - new Date(a.date);
+                        case 'date-asc':
+                            return new Date(a.date) - new Date(b.date);
+                        case 'amount-desc':
+                            return b.amount - a.amount;
+                        case 'amount-asc':
+                            return a.amount - b.amount;
+                        default:
+                            return 0;
+                    }
+                });
+
+                const tbody = document.getElementById('donationTableBody');
+                if (tbody) {
+                    if (data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#64748b;">No donations match the filters.</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = data.map(d => {
+                        const donor = DB.users.find(u => u.id === d.donorId);
+                        const campaign = DB.campaigns.find(c => c.id === d.campaignId);
+                        return `<tr>
+                            <td>${donor ? donor.firstName + ' ' + donor.lastName : 'Unknown'}</td>
+                            <td>${campaign ? campaign.title : 'Unknown'}</td>
+                            <td>R${d.amount}</td>
+                            <td>${d.date}</td>
+                            <td>${d.method}</td>
+                        </tr>`;
+                    }).join('');
+                }
+            };
+
+            // --- ADMIN: RENDER ALL VOLUNTEERS with SORT & FILTER ---
+            function renderAdminVolunteers() {
+                const container = document.getElementById('adminVolunteerList');
+                if (DB.volunteerShifts.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No volunteer shifts recorded yet.</p>';
+                    return;
+                }
+
+                let filterHtml = `
+                    <div class="table-filters">
+                        <span class="filter-label">🔍 Filter:</span>
+                        <select id="volunteerFilterCampaign" onchange="applyVolunteerFilters()">
+                            <option value="all">All Campaigns</option>
+                            ${DB.campaigns.map(c => `<option value="${c.id}">${c.title}</option>`).join('')}
+                        </select>
+                        <select id="volunteerFilterStatus" onchange="applyVolunteerFilters()">
+                            <option value="all">All Status</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <input type="text" id="volunteerFilterName" placeholder="Search volunteer..." oninput="applyVolunteerFilters()">
+                        <span class="filter-label">Sort by:</span>
+                        <select id="volunteerSort" onchange="applyVolunteerFilters()">
+                            <option value="date-desc">Date (Newest)</option>
+                            <option value="date-asc">Date (Oldest)</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+                `;
+
+                let html = filterHtml;
+                html += '<div class="table-container"><table><thead><tr><th>Volunteer</th><th>Campaign</th><th>Date</th><th>Time</th><th>Status</th></tr></thead><tbody id="volunteerTableBody">';
+                DB.volunteerShifts.forEach(s => {
+                    const volunteer = DB.users.find(u => u.id === s.volunteerId);
+                    const campaign = DB.campaigns.find(c => c.id === s.campaignId);
+                    const statusClass = s.status === 'upcoming' ? 'upcoming' : s.status === 'completed' ? 'completed' :
+                        'cancelled';
+                    html += `<tr>
+                        <td>${volunteer ? volunteer.firstName + ' ' + volunteer.lastName : 'Unknown'}</td>
+                        <td>${campaign ? campaign.title : 'Unknown'}</td>
+                        <td>${s.date}</td>
+                        <td>${s.time}</td>
+                        <td><span class="status-badge ${statusClass}">${s.status}</span></td>
+                    </tr>`;
+                });
+                html += '</tbody></table></div>';
+                container.innerHTML = html;
+                applyVolunteerFilters();
+            }
+
+            window.applyVolunteerFilters = function() {
+                const container = document.getElementById('adminVolunteerList');
+                const campaignFilter = document.getElementById('volunteerFilterCampaign')?.value || 'all';
+                const statusFilter = document.getElementById('volunteerFilterStatus')?.value || 'all';
+                const nameSearch = document.getElementById('volunteerFilterName')?.value?.toLowerCase() || '';
+                const sort = document.getElementById('volunteerSort')?.value || 'date-desc';
+
+                let data = [...DB.volunteerShifts];
+
+                if (campaignFilter !== 'all') {
+                    data = data.filter(s => s.campaignId === parseInt(campaignFilter));
+                }
+                if (statusFilter !== 'all') {
+                    data = data.filter(s => s.status === statusFilter);
+                }
+                if (nameSearch) {
+                    data = data.filter(s => {
+                        const volunteer = DB.users.find(u => u.id === s.volunteerId);
+                        return volunteer && (volunteer.firstName.toLowerCase().includes(nameSearch) || volunteer
+                            .lastName.toLowerCase().includes(nameSearch));
+                    });
+                }
+
+                data.sort((a, b) => {
+                    switch (sort) {
+                        case 'date-desc':
+                            return new Date(b.date) - new Date(a.date);
+                        case 'date-asc':
+                            return new Date(a.date) - new Date(b.date);
+                        case 'status':
+                            const order = { 'upcoming': 0, 'completed': 1, 'cancelled': 2 };
+                            return (order[a.status] || 3) - (order[b.status] || 3);
+                        default:
+                            return 0;
+                    }
+                });
+
+                const tbody = document.getElementById('volunteerTableBody');
+                if (tbody) {
+                    if (data.length === 0) {
+                        tbody.innerHTML =
+                            '<tr><td colspan="5" style="text-align:center;color:#64748b;">No volunteer shifts match the filters.</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = data.map(s => {
+                        const volunteer = DB.users.find(u => u.id === s.volunteerId);
+                        const campaign = DB.campaigns.find(c => c.id === s.campaignId);
+                        const statusClass = s.status === 'upcoming' ? 'upcoming' : s.status === 'completed' ?
+                            'completed' : 'cancelled';
+                        return `<tr>
+                            <td>${volunteer ? volunteer.firstName + ' ' + volunteer.lastName : 'Unknown'}</td>
+                            <td>${campaign ? campaign.title : 'Unknown'}</td>
+                            <td>${s.date}</td>
+                            <td>${s.time}</td>
+                            <td><span class="status-badge ${statusClass}">${s.status}</span></td>
+                        </tr>`;
+                    }).join('');
+                }
+            };
+
+            // --- ADMIN: RENDER USERS with SORT & FILTER ---
+            function renderAdminUsers() {
+                const container = document.getElementById('adminUserList');
+                if (DB.users.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No users registered.</p>';
+                    return;
+                }
+
+                let filterHtml = `
+                    <div class="table-filters">
+                        <span class="filter-label">🔍 Filter:</span>
+                        <select id="userFilterRole" onchange="applyUserFilters()">
+                            <option value="all">All Roles</option>
+                            <option value="donor">Donor</option>
+                            <option value="volunteer">Volunteer</option>
+                            <option value="both">Both</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <input type="text" id="userFilterName" placeholder="Search name or email..." oninput="applyUserFilters()">
+                        <span class="filter-label">Sort by:</span>
+                        <select id="userSort" onchange="applyUserFilters()">
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="role">Role</option>
+                        </select>
+                    </div>
+                `;
+
+                let html = filterHtml;
+                html += '<div class="table-container"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody id="userTableBody">';
+                DB.users.forEach(u => {
+                    let roleDisplay = u.role;
+                    if (roleDisplay === 'both') roleDisplay = 'Donor+Volunteer';
+                    else roleDisplay = roleDisplay.charAt(0).toUpperCase() + roleDisplay.slice(1);
+                    html += `<tr>
+                        <td>${u.firstName} ${u.lastName}</td>
+                        <td>${u.email}</td>
+                        <td><span class="status-badge ${u.role === 'admin' ? 'active' : 'upcoming'}">${roleDisplay}</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" onclick="openEditUser(${u.id})">✏️ Edit</button>
+                            <button class="btn btn-danger btn-xs" onclick="deleteUser(${u.id})">🗑️</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table></div>';
+                container.innerHTML = html;
+                applyUserFilters();
+            }
+
+            window.applyUserFilters = function() {
+                const container = document.getElementById('adminUserList');
+                const roleFilter = document.getElementById('userFilterRole')?.value || 'all';
+                const nameSearch = document.getElementById('userFilterName')?.value?.toLowerCase() || '';
+                const sort = document.getElementById('userSort')?.value || 'name-asc';
+
+                let data = [...DB.users];
+
+                if (roleFilter !== 'all') {
+                    data = data.filter(u => u.role === roleFilter);
+                }
+                if (nameSearch) {
+                    data = data.filter(u =>
+                        u.firstName.toLowerCase().includes(nameSearch) ||
+                        u.lastName.toLowerCase().includes(nameSearch) ||
+                        u.email.toLowerCase().includes(nameSearch)
+                    );
+                }
+
+                data.sort((a, b) => {
+                    switch (sort) {
+                        case 'name-asc':
+                            return (a.firstName + a.lastName).localeCompare(b.firstName + b.lastName);
+                        case 'name-desc':
+                            return (b.firstName + b.lastName).localeCompare(a.firstName + a.lastName);
+                        case 'role':
+                            return a.role.localeCompare(b.role);
+                        default:
+                            return 0;
+                    }
+                });
+
+                const tbody = document.getElementById('userTableBody');
+                if (tbody) {
+                    if (data.length === 0) {
+                        tbody.innerHTML =
+                            '<tr><td colspan="4" style="text-align:center;color:#64748b;">No users match the filters.</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = data.map(u => {
+                        let roleDisplay = u.role;
+                        if (roleDisplay === 'both') roleDisplay = 'Donor+Volunteer';
+                        else roleDisplay = roleDisplay.charAt(0).toUpperCase() + roleDisplay.slice(1);
+                        return `<tr>
+                            <td>${u.firstName} ${u.lastName}</td>
+                            <td>${u.email}</td>
+                            <td><span class="status-badge ${u.role === 'admin' ? 'active' : 'upcoming'}">${roleDisplay}</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" onclick="openEditUser(${u.id})">✏️ Edit</button>
+                                <button class="btn btn-danger btn-xs" onclick="deleteUser(${u.id})">🗑️</button>
+                            </td>
+                        </tr>`;
+                    }).join('');
+                }
+            };
+
+            // --- ADMIN: EDIT USER ---
+            window.openEditUser = function(userId) {
+                const user = DB.users.find(u => u.id === userId);
+                if (!user) return;
+                document.getElementById('editUserId').value = user.id;
+                document.getElementById('editUserFirstName').value = user.firstName;
+                document.getElementById('editUserLastName').value = user.lastName;
+                document.getElementById('editUserEmail').value = user.email;
+                document.getElementById('editUserPhone').value = user.phone || '';
+                document.getElementById('editUserRole').value = user.role;
+                document.getElementById('editUserPassword').value = '';
+                document.getElementById('editUserModal').classList.add('active-modal');
+            };
+
+            window.closeEditUserModal = function() {
+                document.getElementById('editUserModal').classList.remove('active-modal');
+            };
+
+            document.getElementById('editUserForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const id = parseInt(document.getElementById('editUserId').value);
+                const user = DB.users.find(u => u.id === id);
+                if (!user) return;
+
+                user.firstName = document.getElementById('editUserFirstName').value.trim();
+                user.lastName = document.getElementById('editUserLastName').value.trim();
+                user.phone = document.getElementById('editUserPhone').value.trim();
+                user.role = document.getElementById('editUserRole').value;
+
+                const newPassword = document.getElementById('editUserPassword').value;
+                if (newPassword && newPassword.length >= 8) {
+                    user.password = hashPassword(newPassword);
+                }
+
+                saveUsers();
+                closeEditUserModal();
+                renderAdminUsers();
+                showModal('✅', 'User Updated', `User ${user.firstName} ${user.lastName} has been updated successfully.`);
+            });
+
+            // --- ADMIN: DELETE USER ---
+            window.deleteUser = function(id) {
+                if (confirm('Are you sure you want to delete this user?')) {
+                    const user = DB.users.find(u => u.id === id);
+                    if (user && user.role === 'admin' && DB.users.filter(u => u.role === 'admin').length <= 1) {
+                        showModal('⚠️', 'Cannot Delete', 'There must be at least one admin user.');
+                        return;
+                    }
+                    DB.users = DB.users.filter(u => u.id !== id);
+                    saveUsers();
+                    renderAdminUsers();
+                    showModal('🗑️', 'User Deleted', 'The user has been removed successfully.');
+                }
+            };
+
+            // --- ADMIN: RENDER CAMPAIGNS with SORT & FILTER ---
+            function renderAdminCampaigns() {
+                const container = document.getElementById('adminCampaignList');
+                if (DB.campaigns.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No campaigns created yet.</p>';
+                    return;
+                }
+
+                let filterHtml = `
+                    <div class="table-filters">
+                        <span class="filter-label">🔍 Filter:</span>
+                        <select id="campaignFilterStatus" onchange="applyCampaignFilters()">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="ended">Ended</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                        <input type="text" id="campaignFilterTitle" placeholder="Search title..." oninput="applyCampaignFilters()">
+                        <span class="filter-label">Sort by:</span>
+                        <select id="campaignSort" onchange="applyCampaignFilters()">
+                            <option value="title-asc">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                            <option value="progress-desc">Progress (Highest)</option>
+                            <option value="progress-asc">Progress (Lowest)</option>
+                        </select>
+                    </div>
+                `;
+
+                let html = filterHtml;
+                html += '<div class="table-container"><table><thead><tr><th>Title</th><th>Goal</th><th>Raised</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead><tbody id="campaignTableBody">';
+                DB.campaigns.forEach(c => {
+                    const pct = Math.round((c.raised / c.goal) * 100);
+                    const statusClass = c.status === 'active' ? 'active-campaign' : c.status === 'ended' ? 'ended' :
+                        'pending';
+                    html += `<tr>
+                        <td>${c.title}</td>
+                        <td>R${c.goal.toLocaleString()}</td>
+                        <td>R${c.raised.toLocaleString()}</td>
+                        <td>${pct}%</td>
+                        <td><span class="status-badge ${statusClass}">${c.status}</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" onclick="openEditCampaign(${c.id})">✏️ Edit</button>
+                            <button class="btn btn-danger btn-xs" onclick="deleteCampaign(${c.id})">🗑️</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table></div>';
+                container.innerHTML = html;
+                applyCampaignFilters();
+            }
+
+            window.applyCampaignFilters = function() {
+                const container = document.getElementById('adminCampaignList');
+                const statusFilter = document.getElementById('campaignFilterStatus')?.value || 'all';
+                const titleSearch = document.getElementById('campaignFilterTitle')?.value?.toLowerCase() || '';
+                const sort = document.getElementById('campaignSort')?.value || 'title-asc';
+
+                let data = [...DB.campaigns];
+
+                if (statusFilter !== 'all') {
+                    data = data.filter(c => c.status === statusFilter);
+                }
+                if (titleSearch) {
+                    data = data.filter(c => c.title.toLowerCase().includes(titleSearch));
+                }
+
+                data.sort((a, b) => {
+                    switch (sort) {
+                        case 'title-asc':
+                            return a.title.localeCompare(b.title);
+                        case 'title-desc':
+                            return b.title.localeCompare(a.title);
+                        case 'progress-desc':
+                            return (b.raised / b.goal) - (a.raised / a.goal);
+                        case 'progress-asc':
+                            return (a.raised / a.goal) - (b.raised / b.goal);
+                        default:
+                            return 0;
+                    }
+                });
+
+                const tbody = document.getElementById('campaignTableBody');
+                if (tbody) {
+                    if (data.length === 0) {
+                        tbody.innerHTML =
+                            '<tr><td colspan="6" style="text-align:center;color:#64748b;">No campaigns match the filters.</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = data.map(c => {
+                        const pct = Math.round((c.raised / c.goal) * 100);
+                        const statusClass = c.status === 'active' ? 'active-campaign' : c.status === 'ended' ?
+                            'ended' : 'pending';
+                        return `<tr>
+                            <td>${c.title}</td>
+                            <td>R${c.goal.toLocaleString()}</td>
+                            <td>R${c.raised.toLocaleString()}</td>
+                            <td>${pct}%</td>
+                            <td><span class="status-badge ${statusClass}">${c.status}</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" onclick="openEditCampaign(${c.id})">✏️ Edit</button>
+                                <button class="btn btn-danger btn-xs" onclick="deleteCampaign(${c.id})">🗑️</button>
+                            </td>
+                        </tr>`;
+                    }).join('');
+                }
+            };
+
+            // --- ADMIN: EDIT CAMPAIGN ---
+            window.openEditCampaign = function(campaignId) {
+                const campaign = DB.campaigns.find(c => c.id === campaignId);
+                if (!campaign) return;
+                document.getElementById('editCampaignId').value = campaign.id;
+                document.getElementById('editCampTitle').value = campaign.title;
+                document.getElementById('editCampDescription').value = campaign.description;
+                document.getElementById('editCampGoal').value = campaign.goal;
+                document.getElementById('editCampVolunteers').value = campaign.volunteersNeeded || 10;
+                document.getElementById('editCampStatus').value = campaign.status || 'active';
+                document.getElementById('editCampaignModal').classList.add('active-modal');
+            };
+
+            window.closeEditCampaignModal = function() {
+                document.getElementById('editCampaignModal').classList.remove('active-modal');
+            };
+
+            document.getElementById('editCampaignForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const id = parseInt(document.getElementById('editCampaignId').value);
+                const campaign = DB.campaigns.find(c => c.id === id);
+                if (!campaign) return;
+
+                campaign.title = document.getElementById('editCampTitle').value.trim();
+                campaign.description = document.getElementById('editCampDescription').value.trim();
+                campaign.goal = parseFloat(document.getElementById('editCampGoal').value);
+                campaign.volunteersNeeded = parseInt(document.getElementById('editCampVolunteers').value) || 10;
+                campaign.status = document.getElementById('editCampStatus').value;
+
+                // Auto-end campaign if goal reached and status is active
+                if (campaign.status === 'active' && campaign.raised >= campaign.goal) {
+                    campaign.status = 'ended';
+                }
+
+                saveCampaigns();
+                closeEditCampaignModal();
+                renderAdminCampaigns();
+                renderCampaigns();
+                showModal('✅', 'Campaign Updated', `"${campaign.title}" has been updated successfully.`);
+            });
+
+            // --- ADMIN: DELETE CAMPAIGN ---
+            window.deleteCampaign = function(id) {
+                if (confirm('Are you sure you want to delete this campaign?')) {
+                    DB.campaigns = DB.campaigns.filter(c => c.id !== id);
+                    saveCampaigns();
+                    renderAdminCampaigns();
+                    renderCampaigns();
+                    showModal('🗑️', 'Campaign Deleted', 'The campaign has been removed successfully.');
+                }
+            };
+
+            // --- ADMIN: CREATE CAMPAIGN ---
+            window.openCreateCampaignModal = function() {
+                document.getElementById('createCampaignModal').classList.add('active-modal');
+                document.getElementById('createCampaignForm').reset();
+                document.getElementById('campStartDate').value = new Date().toISOString().split('T')[0];
+            };
+
+            window.closeCampaignModal = function() {
+                document.getElementById('createCampaignModal').classList.remove('active-modal');
+            };
+
+            // Toggle date fields based on end type
+            document.getElementById('campEndType').addEventListener('change', function() {
+                const row = document.getElementById('campDateRow');
+                if (this.value === 'date') {
+                    row.style.display = 'flex';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('createCampaignForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('campTitle').value.trim();
+                const description = document.getElementById('campDescription').value.trim();
+                const goal = parseFloat(document.getElementById('campGoal').value);
+                const volunteersNeeded = parseInt(document.getElementById('campVolunteers').value) || 10;
+                const endType = document.getElementById('campEndType').value;
+                const status = document.getElementById('campStatus').value;
+
+                if (!title || !description || !goal) {
+                    showModal('⚠️', 'Missing Fields', 'Please fill in all required fields.');
+                    return;
+                }
+
+                const startDate = document.getElementById('campStartDate').value || new Date().toISOString().split('T')[0];
+                const endDate = endType === 'date' ? document.getElementById('campEndDate').value : '';
+
+                const newCampaign = {
+                    id: Date.now(),
+                    title,
+                    description,
+                    goal,
+                    raised: 0,
+                    image: `https://placehold.co/600x400/1e3a8a/ffffff?text=${encodeURIComponent(title)}`,
+                    volunteersNeeded,
+                    startDate,
+                    endDate,
+                    endType,
+                    status: status || 'active',
+                    location: 'Tembisa',
+                    skills: 'Various',
+                    bring: 'Comfortable clothing'
+                };
+
+                DB.campaigns.push(newCampaign);
+                saveCampaigns();
+                closeCampaignModal();
+                renderCampaigns();
+                renderAdminCampaigns();
+                showModal('🎉', 'Campaign Created!', `"${title}" has been launched successfully.`);
+            });
+
+            // --- ADMIN: VIEW REPORTS ---
+            window.viewReports = function() {
+                const container = document.getElementById('reportsContainer');
+                const totalUsers = DB.users.length;
+                const totalDonors = DB.users.filter(u => u.role === 'donor' || u.role === 'both').length;
+                const totalVolunteers = DB.users.filter(u => u.role === 'volunteer' || u.role === 'both').length;
+                const totalDonations = DB.donations.reduce((sum, d) => sum + d.amount, 0);
+                const avgDonation = DB.donations.length > 0 ? (totalDonations / DB.donations.length) : 0;
+                const totalShifts = DB.volunteerShifts.length;
+                const activeCampaigns = DB.campaigns.filter(c => c.status === 'active').length;
+
+                container.innerHTML = `
+                    <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                        <div class="dashboard-card"><h3>Total Users</h3><div class="number">${totalUsers}</div></div>
+                        <div class="dashboard-card"><h3>Donors</h3><div class="number green">${totalDonors}</div></div>
+                        <div class="dashboard-card"><h3>Volunteers</h3><div class="number">${totalVolunteers}</div></div>
+                        <div class="dashboard-card"><h3>Total Donations</h3><div class="number green">R${totalDonations.toLocaleString()}</div></div>
+                        <div class="dashboard-card"><h3>Avg Donation</h3><div class="number">R${avgDonation.toFixed(2)}</div></div>
+                        <div class="dashboard-card"><h3>Total Shifts</h3><div class="number">${totalShifts}</div></div>
+                        <div class="dashboard-card"><h3>Active Campaigns</h3><div class="number">${activeCampaigns}</div></div>
+                    </div>
+                    <p style="text-align:center;color:#64748b;margin-top:0.5rem;font-size:0.85rem;">Report generated on ${new Date().toLocaleString()}</p>
+                `;
+                showModal('📊', 'Report Generated', 'Analytics report has been generated successfully.');
+            };
+
+            // --- PROFILE: LOAD ---
+            function loadProfile() {
+                if (!DB.currentUser) {
+                    navigateTo('login');
+                    return;
+                }
+                const user = DB.currentUser;
+                document.getElementById('profileFirstName').value = user.firstName;
+                document.getElementById('profileLastName').value = user.lastName;
+                document.getElementById('profileEmail').value = user.email;
+                document.getElementById('profilePhone').value = user.phone || '';
+
+                const existingRequest = DB.roleRequests.find(r => r.userId === user.id && r.status === 'pending');
+                if (existingRequest) {
+                    document.getElementById('roleRequestStatus').innerHTML =
+                        `<span style="color: #f59e0b;">⏳ Pending approval: Request to become <strong>${existingRequest.requestedRole}</strong></span>`;
+                } else {
+                    document.getElementById('roleRequestStatus').innerHTML = '';
+                }
+
+                if (user.role === 'volunteer' || user.role === 'both') {
+                    document.getElementById('profileSkillsGroup').style.display = 'block';
+                    document.getElementById('profileSkills').value = user.skills || '';
+                } else {
+                    document.getElementById('profileSkillsGroup').style.display = 'none';
+                }
+            }
+
+            // --- PROFILE: REQUEST ROLE CHANGE ---
+            window.requestRoleChange = function() {
+                if (!DB.currentUser) return;
+                const requestedRole = document.getElementById('profileRequestedRole').value;
+                if (!requestedRole) {
+                    showModal('⚠️', 'Select Role', 'Please select a role to request.');
+                    return;
+                }
+                if (requestedRole === DB.currentUser.role) {
+                    showModal('⚠️', 'Same Role', 'You are already a ' + requestedRole + '.');
+                    return;
+                }
+                const existingRequest = DB.roleRequests.find(r => r.userId === DB.currentUser.id && r.status === 'pending');
+                if (existingRequest) {
+                    showModal('⚠️', 'Pending Request', 'You already have a pending role change request.');
+                    return;
+                }
+                const request = {
+                    id: Date.now(),
+                    userId: DB.currentUser.id,
+                    currentRole: DB.currentUser.role,
+                    requestedRole: requestedRole,
+                    status: 'pending',
+                    requestedAt: new Date().toISOString()
+                };
+                DB.roleRequests.push(request);
+                saveRoleRequests();
+                document.getElementById('roleRequestStatus').innerHTML =
+                    `<span style="color: #f59e0b;">⏳ Pending approval: Request to become <strong>${requestedRole}</strong></span>`;
+                document.getElementById('profileRequestedRole').value = '';
+                showModal('📨', 'Request Submitted!', 'Your role change request has been submitted for admin approval.');
+            };
+
+            // --- PROFILE: SAVE ---
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!DB.currentUser) return;
+                const firstName = document.getElementById('profileFirstName').value.trim();
+                const lastName = document.getElementById('profileLastName').value.trim();
+                const phone = document.getElementById('profilePhone').value.trim();
+                const skills = document.getElementById('profileSkills').value;
+                if (!firstName || !lastName) {
+                    showModal('⚠️', 'Missing Fields', 'First name and last name are required.');
+                    return;
+                }
+                const user = DB.users.find(u => u.id === DB.currentUser.id);
+                if (user) {
+                    user.firstName = firstName;
+                    user.lastName = lastName;
+                    user.phone = phone;
+                    if (user.role === 'volunteer' || user.role === 'both') {
+                        user.skills = skills;
+                    }
+                    saveUsers();
+                    DB.currentUser = user;
+                    saveCurrentUser();
+                    updateUIForAuth();
+                    showModal('✅', 'Profile Updated', 'Your profile has been updated successfully.');
+                }
+            });
+
+            // --- PAYMENT ---
+            let currentPaymentCampaign = null;
+            let currentPaymentRemaining = 0;
+
+            window.updatePaymentSummary = function() {
+                const input = document.getElementById('paymentAmountInput');
+                let amount = parseFloat(input.value) || 50;
+                if (amount < 50) {
+                    amount = 50;
+                    input.value = 50;
+                }
+                if (currentPaymentRemaining > 0 && amount > currentPaymentRemaining) {
+                    amount = currentPaymentRemaining;
+                    input.value = amount;
+                }
+                document.getElementById('summaryAmount').textContent = amount.toFixed(2);
+                document.getElementById('summaryTotal').textContent = amount.toFixed(2);
+            };
+
+            window.setPaymentAmount = function(value) {
+                const input = document.getElementById('paymentAmountInput');
+                if (value === 'max') {
+                    input.value = currentPaymentRemaining;
+                } else {
+                    input.value = value;
+                }
+                updatePaymentSummary();
+            };
+
+            window.openPayment = function(campaignId) {
+                if (!DB.currentUser) {
+                    showModal('🔒', 'Login Required', 'Please login or register to make a donation.');
+                    navigateTo('login');
+                    return;
+                }
+                if (DB.currentUser.role !== 'donor' && DB.currentUser.role !== 'both' && DB.currentUser.role !== 'admin') {
+                    showModal('⚠️', 'Donor Account Required',
+                        'Please register as a donor to make contributions.');
+                    return;
+                }
+
+                const campaign = DB.campaigns.find(c => c.id === campaignId);
+                if (!campaign) {
+                    showModal('⚠️', 'Campaign Not Found', 'The selected campaign does not exist.');
+                    return;
+                }
+
+                // Check if campaign is still active
+                if (campaign.status === 'ended') {
+                    showModal('⚠️', 'Campaign Ended', 'This campaign has ended. Thank you for your support!');
+                    return;
+                }
+
+                currentPaymentCampaign = campaignId;
+                currentPaymentRemaining = campaign.goal - campaign.raised;
+                if (currentPaymentRemaining <= 0) {
+                    showModal('🎉', 'Goal Reached!', 'This campaign has reached its goal. Thank you to all donors!');
+                    return;
+                }
+
+                document.getElementById('paymentCampaign').textContent = campaign.title;
+                document.getElementById('paymentRemaining').textContent = currentPaymentRemaining.toLocaleString();
+                const defaultAmount = Math.min(Math.max(50, Math.round(currentPaymentRemaining * 0.1)), currentPaymentRemaining);
+                document.getElementById('paymentAmountInput').value = Math.max(50, defaultAmount);
+                updatePaymentSummary();
+                document.getElementById('cardDetails').style.display = 'block';
+                document.getElementById('paymentTerms').checked = false;
+                document.getElementById('cardNumber').value = '';
+                document.getElementById('cardExpiry').value = '';
+                document.getElementById('cardCvv').value = '';
+                document.getElementById('cardName').value = '';
+                navigateTo('payment');
+            };
+
+            window.selectPaymentMethod = function(el) {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                el.classList.add('selected');
+                const method = el.querySelector('.name').textContent;
+                if (method === 'Cash Drop-off') {
+                    document.getElementById('cardDetails').style.display = 'none';
+                } else {
+                    document.getElementById('cardDetails').style.display = 'block';
+                }
+            };
+
+            window.processPayment = function() {
+                if (!currentPaymentCampaign) {
+                    showModal('⚠️', 'Error', 'No campaign selected for donation.');
+                    return;
+                }
+                if (!DB.currentUser) {
+                    showModal('🔒', 'Login Required', 'Please login to make a donation.');
+                    navigateTo('login');
+                    return;
+                }
+
+                const terms = document.getElementById('paymentTerms').checked;
+                if (!terms) {
+                    showModal('⚠️', 'Terms Required', 'Please confirm the donation terms and POPIA consent.');
+                    return;
+                }
+
+                const amount = parseFloat(document.getElementById('paymentAmountInput').value);
+                if (amount < 50) {
+                    showModal('⚠️', 'Minimum Amount', 'The minimum donation amount is R50.');
+                    return;
+                }
+                if (amount > currentPaymentRemaining) {
+                    showModal('⚠️', 'Amount Exceeds Remaining',
+                        `The remaining amount for this campaign is R${currentPaymentRemaining.toLocaleString()}. Please adjust your donation.`);
+                    return;
+                }
+
+                const selectedMethod = document.querySelector('.payment-method.selected .name').textContent;
+
+                if (selectedMethod !== 'Cash Drop-off') {
+                    const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                    const cardExpiry = document.getElementById('cardExpiry').value;
+                    const cardCvv = document.getElementById('cardCvv').value;
+                    const cardName = document.getElementById('cardName').value.trim();
+                    if (!cardNumber || cardNumber.length < 16) {
+                        showModal('⚠️', 'Invalid Card', 'Please enter a valid card number.');
+                        return;
+                    }
+                    if (!cardExpiry || cardExpiry.length < 5) {
+                        showModal('⚠️', 'Invalid Expiry', 'Please enter a valid expiry date (MM/YY).');
+                        return;
+                    }
+                    if (!cardCvv || cardCvv.length < 3) {
+                        showModal('⚠️', 'Invalid CVV', 'Please enter a valid CVV.');
+                        return;
+                    }
+                }
+
+                const donation = {
+                    id: Date.now(),
+                    donorId: DB.currentUser.id,
+                    campaignId: currentPaymentCampaign,
+                    amount: amount,
+                    date: new Date().toISOString().split('T')[0],
+                    method: selectedMethod,
+                    status: 'completed'
+                };
+
+                DB.donations.push(donation);
+                saveDonations();
+
+                const campaign = DB.campaigns.find(c => c.id === currentPaymentCampaign);
+                if (campaign) {
+                    campaign.raised += amount;
+                    // Auto-end campaign if goal reached
+                    if (campaign.raised >= campaign.goal) {
+                        campaign.status = 'ended';
+                    }
+                    saveCampaigns();
+                }
+
+                const donor = DB.users.find(u => u.id === DB.currentUser.id);
+                if (donor) {
+                    donor.totalDonated = (donor.totalDonated || 0) + amount;
+                    donor.campaignsSupported = (donor.campaignsSupported || 0) + 1;
+                    donor.taxReceipts = (donor.taxReceipts || 0) + 1;
+                    saveUsers();
+                    DB.currentUser = donor;
+                    saveCurrentUser();
+                }
+
+                showModal('🎉', 'Payment Successful!',
+                    `Your donation of R${amount.toFixed(2)} to "${campaign ? campaign.title : 'the campaign'}" has been processed. A tax receipt will be emailed to you.`
+                    );
+                document.getElementById('paymentTerms').checked = false;
+                document.getElementById('cardNumber').value = '';
+                document.getElementById('cardExpiry').value = '';
+                document.getElementById('cardCvv').value = '';
+                document.getElementById('cardName').value = '';
+                currentPaymentCampaign = null;
+                currentPaymentRemaining = 0;
+                renderCampaigns();
+                updateDashboard();
+                setTimeout(() => navigateTo('dashboard'), 1000);
+            };
+
+            // --- VOLUNTEER DETAIL ---
+            let currentVolunteerCampaign = null;
+
+            window.showVolunteerDetail = function(campaignId) {
+                const campaign = DB.campaigns.find(c => c.id === campaignId);
+                if (!campaign) {
+                    showModal('⚠️', 'Campaign Not Found', 'The selected campaign does not exist.');
+                    return;
+                }
+
+                currentVolunteerCampaign = campaignId;
+                document.getElementById('vdCampaign').textContent = campaign.title;
+                document.getElementById('vdDescription').textContent = campaign.description;
+                document.getElementById('vdLocation').textContent = campaign.location || 'Tembisa';
+                document.getElementById('vdNeeded').textContent = campaign.volunteersNeeded || '10';
+                document.getElementById('vdSkills').textContent = campaign.skills || 'Various skills needed';
+                document.getElementById('vdBring').textContent = campaign.bring || 'Comfortable clothing, water bottle';
+
+                // Set date range
+                const dateInput = document.getElementById('vdDate');
+                dateInput.min = campaign.startDate || '';
+                dateInput.max = campaign.endDate || '';
+                dateInput.value = campaign.startDate || '';
+
+                document.getElementById('vdTime').value = '';
+
+                navigateTo('volunteerDetail');
+            };
+
+            window.confirmVolunteerSignup = function() {
+                if (!DB.currentUser) {
+                    showModal('🔒', 'Login Required', 'Please login or register to volunteer.');
+                    navigateTo('login');
+                    return;
+                }
+                if (DB.currentUser.role !== 'volunteer' && DB.currentUser.role !== 'both' && DB.currentUser.role !==
+                    'admin') {
+                    showModal('⚠️', 'Volunteer Account Required',
+                        'Please register as a volunteer to sign up for shifts.');
+                    return;
+                }
+
+                const campaign = DB.campaigns.find(c => c.id === currentVolunteerCampaign);
+                if (!campaign) {
+                    showModal('⚠️', 'Error', 'Campaign not found.');
+                    return;
+                }
+
+                const date = document.getElementById('vdDate').value;
+                const time = document.getElementById('vdTime').value;
+
+                if (!date) {
+                    showModal('⚠️', 'Select Date', 'Please select a date for your shift.');
+                    return;
+                }
+                if (!time) {
+                    showModal('⚠️', 'Select Time', 'Please select a shift time.');
+                    return;
+                }
+
+                // Check if already signed up
+                const existing = DB.volunteerShifts.find(s =>
+                    s.volunteerId === DB.currentUser.id &&
+                    s.campaignId === currentVolunteerCampaign &&
+                    s.date === date &&
+                    s.time === time
+                );
+                if (existing) {
+                    showModal('⚠️', 'Already Signed Up', 'You are already registered for this shift.');
+                    return;
+                }
+
+                const shift = {
+                    id: Date.now(),
+                    volunteerId: DB.currentUser.id,
+                    campaignId: currentVolunteerCampaign,
+                    date: date,
+                    time: time,
+                    status: 'upcoming'
+                };
+
+                DB.volunteerShifts.push(shift);
+                saveShifts();
+
+                const volunteer = DB.users.find(u => u.id === DB.currentUser.id);
+                if (volunteer) {
+                    volunteer.upcomingShifts = (volunteer.upcomingShifts || 0) + 1;
+                    saveUsers();
+                    DB.currentUser = volunteer;
+                    saveCurrentUser();
+                }
+
+                showModal('✅', 'Shift Registered!',
+                    `You have successfully signed up for "${campaign.title}" on ${date} (${time}). Check your dashboard for details.`
+                    );
+                updateUIForAuth();
+                navigateTo('dashboard');
+            };
+
+            // --- MODAL ---
+            const modal = document.getElementById('successModal');
+
+            window.showModal = function(icon, title, message) {
+                document.getElementById('modalIcon').textContent = icon;
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalMessage').textContent = message;
+                modal.classList.add('active-modal');
+            };
+
+            window.closeModal = function() {
+                modal.classList.remove('active-modal');
+            };
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            // --- CARD INPUT FORMATTING ---
+            document.getElementById('cardNumber').addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 16) value = value.slice(0, 16);
+                let formatted = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) formatted += ' ';
+                    formatted += value[i];
+                }
+                this.value = formatted;
+            });
+
+            document.getElementById('cardExpiry').addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 4) value = value.slice(0, 4);
+                if (value.length > 2) {
+                    this.value = value.slice(0, 2) + '/' + value.slice(2);
+                } else {
+                    this.value = value;
+                }
+            });
+
+            document.getElementById('cardCvv').addEventListener('input', function(e) {
+                this.value = this.value.replace(/\D/g, '').slice(0, 4);
+            });
+
+            // --- INIT ---
+            updateUIForAuth();
+            updateDashboard();
+
+        });
+    </script>
+</body>
+</html>
